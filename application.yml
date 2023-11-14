@@ -37,3 +37,7 @@ spring:
 logging:
   file:
     name: error.log
+    level: ERROR
+  console:
+    name: "CONSOLE"
+    level: INFO
