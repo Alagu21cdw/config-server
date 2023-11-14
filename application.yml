@@ -1,0 +1,35 @@
+schedulers:
+  taskconfig:
+    - task:
+        query: "{ '$match': {} }"
+        scheduleTime: "0/20 * * * * *"
+        outputCollection: "deliveryQueue"
+        description: "Task to pick documents from order and insert in delivery queue"
+    - task:
+        query: "{'$group': {'_id': '$product', 'count': { '$sum': 1 }}},{'$match': {'orderedDay': 'Wednesday'}}"
+        scheduleTime: "0/5 * * * * *"
+        outputCollection: "ordersInWednesday"
+        description: "Task to count the number of particular products ordered on wednesday"
+    - task:
+        query: "{'$group':{'_id':'$product','averageQuantity':{'$avg':'$quantity'}}},
+        {'$project':{'_id':0,'product':'$_id','averageQuantity':1}}"
+        scheduleTime: "0/5 * * * * *"
+        outputCollection: "averageOrders"
+        description: "Task to find the average quantity of each products ordered"
+    - task:
+        query: "{'$group': {'_id': '$product', 'names': {'$addToSet': '$name'}}}"
+        scheduleTime: "0/20 * * * * *"
+        outputCollection: "customers"
+        description: "Task to give the names of customers who ordered particular product"
+    - task:
+        query: "{'$group': {'_id': '$product', 'price': {'$first': '$price'}}}"
+        scheduleTime: "0/40 * * * * *"
+        outputCollection: "price"
+        description: "Task to update the price of each product to another collection"
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: productmanagementsystem
