@@ -33,3 +33,7 @@ spring:
       host: localhost
       port: 27017
       database: productmanagementsystem
+
+logging:
+  file:
+    name: error.log
