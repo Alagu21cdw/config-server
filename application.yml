@@ -6,7 +6,7 @@ schedulers:
         outputCollection: "deliveryQueue"
         description: "Task to pick documents from order and insert in delivery queue"
     - task:
-        query: "{'$group': {'_id': '$product', 'count': { '$sum': 1 }}},{'$match': {'orderedDay': 'Wednesday'}"
+        query: "{'$group': {'_id': '$product', 'count': { '$sum': 1 }}},{'$match': {'orderedDay': 'Wednesday'} }"
         scheduleTime: "0/5 * * * * *"
         outputCollection: "ordersInWednesday"
         description: "Task to count the number of particular products ordered on wednesday"
