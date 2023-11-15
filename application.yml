@@ -1,7 +1,7 @@
 schedulers:
   taskconfig:
     - task:
-        query: "{ '$match': {} }"
+        query: "{ '$match': {} "
         scheduleTime: "0/5 * * * * *"
         #scheduleTime: "0 0 0 * * MON"
         outputCollection: "deliveryQueue"
