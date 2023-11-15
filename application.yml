@@ -1,8 +1,8 @@
 schedulers:
   taskconfig:
     - task:
-        query: "{ '$match': {} "
-        scheduleTime: "0/30 * * * * *"
+        query: "{ '$match': {} }"
+        scheduleTime: "0/30 * * * *"
         #scheduleTime: "0 0 0 * * MON"
         outputCollection: "deliveryQueue"
         description: "Task to pick documents from order and insert in delivery queue"
